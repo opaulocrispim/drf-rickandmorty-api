@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import os
+import os, django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,17 +40,28 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rickandmorty'
+    'rickandmorty',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+]
+
+CORS_ALLOW_ALL_ORIGINS: True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5000',
+    'https://web-rickandmorty.herokuapp.com/'
 ]
 
 ROOT_URLCONF = 'setup.urls'
@@ -143,4 +154,4 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20
 }
 
-
+django_heroku.settings(locals())

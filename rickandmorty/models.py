@@ -37,7 +37,7 @@ class Personagem(Base):
     genero = models.CharField(max_length=1, choices=GENERO, blank=False, null=False, default='D')
     origem = models.ManyToManyField('Localizacao', related_name='origem_personagem')
     localizacao = models.ManyToManyField('Localizacao', related_name='localizacao_personagem')
-    imagem = models.ImageField(max_length=255, null=True, blank=True)
+    imagem = models.URLField(unique=True)
     episodio = models.ManyToManyField('Episodio', related_name='episodio_personagem', blank=True)
     url = models.URLField(unique=True)
 
